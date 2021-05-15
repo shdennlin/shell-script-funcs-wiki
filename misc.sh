@@ -43,3 +43,14 @@ var1=$(read_var "var1")
 var2=$(read_var "var2")
 echo "var1=${var1}"
 echo "var2=${var2}"
+
+
+# print variable
+echo "\n=====print variable====="
+print_var(){
+    eval "var=$1"
+    eval echo "$1=\${${var}}"
+}
+
+install_all_stat="foo"
+print_var 'install_all_stat'
