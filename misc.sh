@@ -35,12 +35,12 @@ fi
 
 # read .env variable
 echo "\n=====read_var====="
-read_var () {
+read_env () {
     echo $(grep -v '^#' .env | grep -e "$1" | sed -e 's/.*=//')
 }
 
-var1=$(read_var "var1")
-var2=$(read_var "var2")
+var1=$(read_env "var1")
+var2=$(read_env "var2")
 echo "var1=${var1}"
 echo "var2=${var2}"
 
@@ -52,5 +52,13 @@ print_var(){
     eval echo "$1=\${${var}}"
 }
 
-install_all_stat="foo"
-print_var 'install_all_stat'
+
+# prompt for Yes/No/Cancel input in a Linux shell script?
+while true; do
+    read -p "Do you wish to install this program?" yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
